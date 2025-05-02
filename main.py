@@ -7,7 +7,7 @@ from io import StringIO
 
 st.set_page_config(page_title="INTELLISCAN Report Viewer", layout="wide")
 
-st.title("🔍 INTELLISCAN Report Search App")
+st.title("🔍 FAST FORMULA Search App")
 
 # Input fields
 env_url = st.text_input("🌐 Environment URL (e.g. https://iavnqy-test.fa.ocs.oraclecloud.com)", "")
@@ -35,7 +35,7 @@ def fetch_report(env_url, username, password):
              <pub:reportRequest>
                 <pub:attributeFormat>csv</pub:attributeFormat>
                 <pub:flattenXML>false</pub:flattenXML>
-                <pub:reportAbsolutePath>/Custom/Human Capital Management/Sample Reports/INTELLISCAN REPORT.xdo</pub:reportAbsolutePath>
+                <pub:reportAbsolutePath>/Custom/Human Capital Management/Sample Reports/FF INTELLISCAN REPORT.xdo</pub:reportAbsolutePath>
                 <pub:sizeOfDataChunkDownload>-1</pub:sizeOfDataChunkDownload>
              </pub:reportRequest>
           </pub:runReport>
