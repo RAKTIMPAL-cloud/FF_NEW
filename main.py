@@ -6,18 +6,17 @@ import pandas as pd
 from io import StringIO
 
 st.set_page_config(page_title="INTELLISCAN Report Viewer", layout="wide")
+st.title("🧠 INTELLISCAN Search Center")
 
-st.title("🔍 FAST FORMULA Search App")
-
-# Input fields
+# Shared Input Fields
 env_url = st.text_input("🌐 Environment URL (e.g. https://iavnqy-test.fa.ocs.oraclecloud.com)", "")
 username = st.text_input("👤 Username", "")
 password = st.text_input("🔑 Password", type="password")
 search_term = st.text_input("🔍 Search by full or partial OBJ_NAME or DATA:")
 
-def fetch_report(env_url, username, password):
+# Shared SOAP fetch function
+def fetch_report(env_url, username, password, report_path):
     full_url = env_url.rstrip("/") + "/xmlpserver/services/ExternalReportWSSService"
-
     credentials = f"{username}:{password}"
     encoded_credentials = base64.b64encode(credentials.encode("utf-8")).decode("utf-8")
 
@@ -26,7 +25,6 @@ def fetch_report(env_url, username, password):
         "Authorization": f"Basic {encoded_credentials}"
     }
 
-    # Static SOAP request for INTELLISCAN report with no parameters
     soap_request = f"""
     <soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:pub="http://xmlns.oracle.com/oxp/service/PublicReportService">
        <soap:Header/>
@@ -35,7 +33,7 @@ def fetch_report(env_url, username, password):
              <pub:reportRequest>
                 <pub:attributeFormat>csv</pub:attributeFormat>
                 <pub:flattenXML>false</pub:flattenXML>
-                <pub:reportAbsolutePath>/Custom/Human Capital Management/Sample Reports/FF INTELLISCAN REPORT.xdo</pub:reportAbsolutePath>
+                <pub:reportAbsolutePath>{report_path}</pub:reportAbsolutePath>
                 <pub:sizeOfDataChunkDownload>-1</pub:sizeOfDataChunkDownload>
              </pub:reportRequest>
           </pub:runReport>
@@ -66,30 +64,55 @@ def fetch_report(env_url, username, password):
         st.code(response.content.decode("utf-8"), language="xml")
         return None
 
-# Run logic
-if st.button("📥 Fetch Report"):
-    if env_url and username and password:
-        report_csv = fetch_report(env_url, username, password)
+# Tabs for two reports
+tab1, tab2 = st.tabs(["📘 LOOKUP & VALUESET Search", "📗 FAST FORMULA Search"])
 
-        if report_csv:
-            # Convert CSV to DataFrame
-            df = pd.read_csv(StringIO(report_csv))
-            df.columns = [col.strip().upper() for col in df.columns]
+with tab1:
+    st.subheader("📘 LOOKUP & VALUESET Report")
+    if st.button("📥 Fetch LOOKUP Report"):
+        if env_url and username and password:
+            report_csv = fetch_report(env_url, username, password, 
+                "/Custom/Human Capital Management/Sample Reports/INTELLISCAN REPORT.xdo")
 
-            # Ensure all expected columns are present
-            expected_columns = ['OBJ_TYPE', 'OBJ_NAME', 'DATA']
-            for col in expected_columns:
-                if col not in df.columns:
-                    df[col] = ""  # Add missing columns with empty data
+            if report_csv:
+                df = pd.read_csv(StringIO(report_csv))
+                df.columns = [col.strip().upper() for col in df.columns]
+                for col in ['OBJ_TYPE', 'OBJ_NAME', 'DATA']:
+                    if col not in df.columns:
+                        df[col] = ""
 
-            # Optional filtering
-            if search_term:
-                search_upper = search_term.upper()
-                df = df[df["OBJ_NAME"].str.upper().str.contains(search_upper) | df["DATA"].str.upper().str.contains(search_upper)]
+                if search_term:
+                    search_upper = search_term.upper()
+                    df = df[df["OBJ_NAME"].str.upper().str.contains(search_upper) | df["DATA"].str.upper().str.contains(search_upper)]
 
-            st.success(f"✅ Fetched {len(df)} matching records.")
-            st.dataframe(df, use_container_width=True, hide_index=True)  # Hide index column
+                st.success(f"✅ Fetched {len(df)} matching records.")
+                st.dataframe(df, use_container_width=True, hide_index=True)
+            else:
+                st.warning("❌ Could not fetch or decode the report.")
         else:
-            st.warning("❌ Could not fetch or decode the report.")
-    else:
-        st.warning("⚠️ Please fill in all fields before fetching the report.")
+            st.warning("⚠️ Please fill in all fields before fetching the report.")
+
+with tab2:
+    st.subheader("📗 FAST FORMULA Report")
+    if st.button("📥 Fetch FAST FORMULA Report"):
+        if env_url and username and password:
+            report_csv = fetch_report(env_url, username, password, 
+                "/Custom/Human Capital Management/Sample Reports/FF INTELLISCAN REPORT.xdo")
+
+            if report_csv:
+                df = pd.read_csv(StringIO(report_csv))
+                df.columns = [col.strip().upper() for col in df.columns]
+                for col in ['OBJ_TYPE', 'OBJ_NAME', 'DATA']:
+                    if col not in df.columns:
+                        df[col] = ""
+
+                if search_term:
+                    search_upper = search_term.upper()
+                    df = df[df["OBJ_NAME"].str.upper().str.contains(search_upper) | df["DATA"].str.upper().str.contains(search_upper)]
+
+                st.success(f"✅ Fetched {len(df)} matching records.")
+                st.dataframe(df, use_container_width=True, hide_index=True)
+            else:
+                st.warning("❌ Could not fetch or decode the report.")
+        else:
+            st.warning("⚠️ Please fill in all fields before fetching the report.")
