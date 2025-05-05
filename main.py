@@ -6,7 +6,7 @@ import pandas as pd
 from io import StringIO
 
 st.set_page_config(page_title="INTELLISCAN Search Center", layout="wide")
-st.title("🧠 Oracle Custom Objects IntelliScan Tool")
+st.title("🔍 Oracle Custom Objects IntelliScan Tool 🛠️")
 
 # Shared Input Fields
 env_url = st.text_input("🌐 Environment URL (e.g. https://iavnqy-test.fa.ocs.oraclecloud.com)", "")
