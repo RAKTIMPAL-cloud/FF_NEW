@@ -12,7 +12,7 @@ st.title("🧠 Oracle Custom Objects IntelliScan Tool")
 env_url = st.text_input("🌐 Environment URL (e.g. https://iavnqy-test.fa.ocs.oraclecloud.com)", "")
 username = st.text_input("👤 Username", "")
 password = st.text_input("🔑 Password", type="password")
-search_term = st.text_input("🔍 Search by full or partial OBJ_NAME or DATA:")
+search_term = st.text_input("🔍 Search by full or partial OBJ_NAME or DATA as Keyword:")
 
 # Shared SOAP fetch function
 def fetch_report(env_url, username, password, report_path):
