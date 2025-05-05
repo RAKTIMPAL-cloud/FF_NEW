@@ -70,8 +70,8 @@ tab1, tab2 = st.tabs(["📘 LOOKUP & VALUESET Search", "📗 FAST FORMULA Search
 with tab1:
     st.subheader("📘 LOOKUP & VALUESET Report")
     if st.button("📥 Fetch LOOKUP Report"):
-        if env_url and username and password:
-            report_csv = fetch_report(env_url, username, password, 
+        if env_url and username and password and search_term:
+            report_csv = fetch_report(env_url, username, password,
                 "/Custom/Human Capital Management/Sample Reports/INTELLISCAN REPORT.xdo")
 
             if report_csv:
@@ -81,22 +81,21 @@ with tab1:
                     if col not in df.columns:
                         df[col] = ""
 
-                if search_term:
-                    search_upper = search_term.upper()
-                    df = df[df["OBJ_NAME"].str.upper().str.contains(search_upper) | df["DATA"].str.upper().str.contains(search_upper)]
+                search_upper = search_term.upper()
+                df = df[df["OBJ_NAME"].str.upper().str.contains(search_upper) | df["DATA"].str.upper().str.contains(search_upper)]
 
                 st.success(f"✅ Fetched {len(df)} matching records.")
                 st.dataframe(df, use_container_width=True, hide_index=True)
             else:
                 st.warning("❌ Could not fetch or decode the report.")
         else:
-            st.warning("⚠️ Please fill in all fields before fetching the report.")
+            st.warning("⚠️ Please fill in all fields, including the search term.")
 
 with tab2:
     st.subheader("📗 FAST FORMULA Report")
     if st.button("📥 Fetch FAST FORMULA Report"):
-        if env_url and username and password:
-            report_csv = fetch_report(env_url, username, password, 
+        if env_url and username and password and search_term:
+            report_csv = fetch_report(env_url, username, password,
                 "/Custom/Human Capital Management/Sample Reports/FF INTELLISCAN REPORT.xdo")
 
             if report_csv:
@@ -106,13 +105,12 @@ with tab2:
                     if col not in df.columns:
                         df[col] = ""
 
-                if search_term:
-                    search_upper = search_term.upper()
-                    df = df[df["OBJ_NAME"].str.upper().str.contains(search_upper) | df["DATA"].str.upper().str.contains(search_upper)]
+                search_upper = search_term.upper()
+                df = df[df["OBJ_NAME"].str.upper().str.contains(search_upper) | df["DATA"].str.upper().str.contains(search_upper)]
 
                 st.success(f"✅ Fetched {len(df)} matching records.")
                 st.dataframe(df, use_container_width=True, hide_index=True)
             else:
                 st.warning("❌ Could not fetch or decode the report.")
         else:
-            st.warning("⚠️ Please fill in all fields before fetching the report.")
+            st.warning("⚠️ Please fill in all fields, including the search term.")
