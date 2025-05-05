@@ -119,8 +119,9 @@ with tab2:
 
 st.markdown("""
 <hr style="margin-top: 50px;">
-<div style='text-align: center; color: yellow;'>
-    <small>App has been developed by <strong>Raktim Pal</strong></small>
+<div style='text-align: center; color: yellow; font-size: 0.85em;'>
+    <p>App has been developed by <strong>Raktim Pal</strong></p>
+    <p>© 2025 Raktim Pal. All rights reserved.</p>
 </div>
 """, unsafe_allow_html=True)
 
