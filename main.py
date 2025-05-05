@@ -5,8 +5,8 @@ import xml.etree.ElementTree as ET
 import pandas as pd
 from io import StringIO
 
-st.set_page_config(page_title="INTELLISCAN Report Viewer", layout="wide")
-st.title("🧠 INTELLISCAN Search Center")
+st.set_page_config(page_title="INTELLISCAN Search Center", layout="wide")
+st.title("🧠 Oracle Custom Objects IntelliScan Tool")
 
 # Shared Input Fields
 env_url = st.text_input("🌐 Environment URL (e.g. https://iavnqy-test.fa.ocs.oraclecloud.com)", "")
@@ -110,6 +110,14 @@ with tab2:
 
                 st.success(f"✅ Fetched {len(df)} matching records.")
                 st.dataframe(df, use_container_width=True, hide_index=True)
+
+st.markdown("""
+<hr style="margin-top: 50px;">
+<div style='text-align: center; color: gray;'>
+    <small>App has been developed by <strong>Raktim Pal</strong></small>
+</div>
+""", unsafe_allow_html=True)
+
             else:
                 st.warning("❌ Could not fetch or decode the report.")
         else:
