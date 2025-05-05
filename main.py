@@ -119,7 +119,7 @@ with tab2:
 
 st.markdown("""
 <hr style="margin-top: 50px;">
-<div style='text-align: center; color: gray;'>
+<div style='text-align: center; color: yellow;'>
     <small>App has been developed by <strong>Raktim Pal</strong></small>
 </div>
 """, unsafe_allow_html=True)
