@@ -111,6 +111,12 @@ with tab2:
                 st.success(f"✅ Fetched {len(df)} matching records.")
                 st.dataframe(df, use_container_width=True, hide_index=True)
 
+
+            else:
+                st.warning("❌ Could not fetch or decode the report.")
+        else:
+            st.warning("⚠️ Please fill in all fields, including the search term.")
+
 st.markdown("""
 <hr style="margin-top: 50px;">
 <div style='text-align: center; color: gray;'>
@@ -118,7 +124,3 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-            else:
-                st.warning("❌ Could not fetch or decode the report.")
-        else:
-            st.warning("⚠️ Please fill in all fields, including the search term.")
