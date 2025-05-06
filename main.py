@@ -10,8 +10,8 @@ st.title("🔍 Oracle Custom Objects IntelliScan Tool 🛠️")
 
 # Add the hyperlink just below the title
 st.markdown("""
-<div style='font-size: 18px; margin-bottom: 20px;'>
-    🔗 For scanning custom reports, 
+<div style='font-size: 20px; margin-bottom: 20px;'>
+    🔗 For scanning custom BIP reports, 
     <a href='https://bip-intelliscan-4pjkyxpucp343stpkwly97.streamlit.app/' target='_blank' style='color: yellow; font-weight: bold; text-decoration: underline;'>
         click here
     </a>
