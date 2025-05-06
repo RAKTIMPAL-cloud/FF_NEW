@@ -69,7 +69,7 @@ tab1, tab2 = st.tabs(["📘 LOOKUP & VALUESET Search", "📗 FAST FORMULA Search
 
 with tab1:
     st.subheader("📘 LOOKUP & VALUESET Report")
-    if st.button("📥 Fetch LOOKUP Report"):
+    if st.button("📥 Fetch LOOKUP & VALUESET Report"):
         if env_url and username and password and search_term:
             report_csv = fetch_report(env_url, username, password,
                 "/Custom/Human Capital Management/Sample Reports/INTELLISCAN REPORT.xdo")
