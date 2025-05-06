@@ -10,8 +10,14 @@ st.title("🔍 Oracle Custom Objects IntelliScan Tool 🛠️")
 
 # Add the hyperlink just below the title
 st.markdown("""
-### 🔗 For scanning custom reports, [click here](https://bip-intelliscan-4pjkyxpucp343stpkwly97.streamlit.app/)
-""")
+<div style='font-size: 18px; margin-bottom: 20px;'>
+    🔗 For scanning custom reports, 
+    <a href='https://bip-intelliscan-4pjkyxpucp343stpkwly97.streamlit.app/' target='_blank' style='color: yellow; font-weight: bold; text-decoration: underline;'>
+        click here
+    </a>
+</div>
+""", unsafe_allow_html=True)
+
 
 # Shared Input Fields
 env_url = st.text_input("🌐 Environment URL (e.g. https://iavnqy-test.fa.ocs.oraclecloud.com)", "")
