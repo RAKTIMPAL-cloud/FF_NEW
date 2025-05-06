@@ -8,6 +8,11 @@ from io import StringIO
 st.set_page_config(page_title="INTELLISCAN Search Center", layout="wide")
 st.title("🔍 Oracle Custom Objects IntelliScan Tool 🛠️")
 
+# Add the hyperlink just below the title
+st.markdown("""
+### 🔗 For scanning custom reports, [click here](https://bip-intelliscan-4pjkyxpucp343stpkwly97.streamlit.app/)
+""")
+
 # Shared Input Fields
 env_url = st.text_input("🌐 Environment URL (e.g. https://iavnqy-test.fa.ocs.oraclecloud.com)", "")
 username = st.text_input("👤 Username", "")
