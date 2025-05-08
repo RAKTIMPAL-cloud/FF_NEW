@@ -116,8 +116,20 @@ with tab2:
                     if col not in df.columns:
                         df[col] = ""
 
-                search_upper = search_term.upper()
-                df = df[df["OBJ_NAME"].str.upper().str.contains(search_upper) | df["DATA"].str.upper().str.contains(search_upper)]
+                
+                #search_upper = search_term.upper()
+                #df = df[df["OBJ_NAME"].str.upper().str.contains(search_upper) | df["DATA"].str.upper().str.contains(search_upper)]
+
+                import re
+
+                    # Convert wildcard search term to regex
+                pattern = re.escape(search_term.upper()).replace("%", ".*")
+                
+                # Use str.contains with regex
+                df = df[
+                    df["OBJ_NAME"].str.upper().str.contains(pattern, regex=True) |
+                    df["DATA"].str.upper().str.contains(pattern, regex=True)
+                ]
 
                 st.success(f"✅ Fetched {len(df)} matching records.")
                 st.dataframe(df, use_container_width=True, hide_index=True)
