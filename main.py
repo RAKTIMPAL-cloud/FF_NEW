@@ -110,9 +110,6 @@ with tab1:
                 st.success(f"✅ Fetched {len(df)} matching records.")
                 st.dataframe(df, use_container_width=True, hide_index=True)
                 
-                
-                st.success(f"✅ Fetched {len(df)} matching records.")
-                st.dataframe(df, use_container_width=True, hide_index=True)
             else:
                 st.warning("❌ Could not fetch or decode the report.")
         else:
