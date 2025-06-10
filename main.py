@@ -76,11 +76,11 @@ def fetch_report(env_url, username, password, report_path):
         return None
 
 # Tabs for two reports
-tab1, tab2 = st.tabs(["📘 LOOKUP & VALUESET Search", "📗 FAST FORMULA Search"])
+tab1, tab2 = st.tabs(["📘 LOOKUPS, VALUE SETS, EXTRACTS SEARCH Search", "📗 FAST FORMULA Search"])
 
 with tab1:
-    st.subheader("📘 LOOKUP & VALUESET Report")
-    if st.button("📥 Fetch LOOKUP & VALUESET Report"):
+    st.subheader("📘 LOOKUPS, VALUE SETS, EXTRACTS SEARCH Report")
+    if st.button("📥 Fetch LOOKUPS, VALUE SETS, EXTRACTS SEARCH Report"):
         if env_url and username and password and search_term:
             report_csv = fetch_report(env_url, username, password,
                 "/Custom/Human Capital Management/Sample Reports/INTELLISCAN REPORT.xdo")
